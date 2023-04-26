@@ -2,7 +2,8 @@
 // eslint-disable-next-line import/no-unresolved
 import { Octokit } from 'https://cdn.skypack.dev/@octokit/core';
 
-const githubToken = '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';
+// const githubToken = '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';
+const githubToken = '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';
 
 const octokit = new Octokit({
   auth: githubToken,

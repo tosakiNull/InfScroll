@@ -2,6 +2,7 @@
 import { onMounted, reactive, ref } from 'vue';
 import { getRepos } from '@/api/index';
 import ScrollList from '@/components/InfScroll/ScrollList.vue';
+import ListView from '@/components/ListView/ListView.vue';
 
 const loading = ref(true);
 
@@ -33,9 +34,22 @@ onMounted(async () => {
 </script>
 
 <template>
-  <header>Infinity Scroll  Total: {{ total }}</header>
+  <header>
+    <div>
+      Infinity Scroll  Total: {{ total }}
+    </div>
+  </header>
   <main>
-    <ScrollList :data="repoList" :getData="getData" :loading="loading" :defQuery="defQuery" />
+    <div class="main-view">
+      <!-- <ScrollList :data="repoList" :getData="getData" :loading="loading" :defQuery="defQuery" /> -->
+      <ListView
+        :data="repoList"
+        :getData="getData"
+        :loading="loading"
+        :defQuery="defQuery"
+        :total="total"
+      />
+    </div>
   </main>
 </template>
 
@@ -45,14 +59,19 @@ header {
   background-color: #6A6AFF;
   width: 100%;
   color: #FCFCFC;
-  padding: 1rem;
-  height: 4%;
+  height: 5rem;
   position: fixed;
   top: 0;
 }
+header.div {
+  padding: 1rem;
+}
 main {
-  height: 90%;
-  padding: 10% 1rem 1.5rem 1rem;
-  overflow-y: hidden;
+  height: 100%;
+}
+.main-view {
+  padding: 1rem;
+  padding-top: 6rem;
+  height: 88.5%;
 }
 </style>
