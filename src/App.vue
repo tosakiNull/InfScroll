@@ -1,26 +1,28 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import { getRepos } from '@/api/index';
-import ScrollList from '@/components/InfScroll/ScrollList.vue';
 import ListView from '@/components/ListView/ListView.vue';
 
 const loading = ref(true);
 
 const defQuery = reactive({
+  q: 'jquery in:name',
   page: 1,
   per_page: 6,
 });
 let repoList = reactive([]);
 const total = ref(0);
 
+/**
+ * 取得 github repos 資料
+ *
+ */
 async function getData(query = defQuery) {
   loading.value = true;
 
   const res = await getRepos(query);
 
   if (res) {
-    console.log(res);
-
     repoList = repoList.concat(res.data.items);
     total.value = res.data.total_count;
   }
@@ -35,19 +37,18 @@ onMounted(async () => {
 
 <template>
   <header>
-    <div>
-      Infinity Scroll  Total: {{ total }}
+    <div class="header-nav">
+      <h2>Infinity Scroll</h2>
+      <small>Total: {{ total }}</small>
     </div>
   </header>
   <main>
     <div class="main-view">
-      <!-- <ScrollList :data="repoList" :getData="getData" :loading="loading" :defQuery="defQuery" /> -->
       <ListView
         :data="repoList"
         :getData="getData"
         :loading="loading"
         :defQuery="defQuery"
-        :total="total"
       />
     </div>
   </main>
@@ -63,15 +64,21 @@ header {
   position: fixed;
   top: 0;
 }
-header.div {
+.header-nav {
   padding: 1rem;
+}
+.header-nav h2,
+.header-nav small {
+  display: inline-block;
+  padding: 0 1rem;
 }
 main {
   height: 100%;
+  background-color: #D0D0D0;
 }
 .main-view {
   padding: 1rem;
   padding-top: 6rem;
-  height: 88.5%;
+  height: 90vh;
 }
 </style>

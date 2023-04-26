@@ -1,11 +1,12 @@
 <script setup>
+/** V1.0 */
 import {
   defineProps,
   toRefs,
-  onMounted,
+  // onMounted,
   ref,
   reactive,
-  onUnmounted,
+  // onUnmounted,
 } from 'vue';
 import ScrollItem from './ScrollItem.vue';
 
@@ -20,24 +21,24 @@ const { data, loading } = toRefs(props);
 const scrollListRef = ref(null);
 const query = reactive({ ...props.defQuery });
 
-function handleScroll() {
-  const scrollHeight = document.body.scrollHeight;
-  const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-  const clientHeight = document.documentElement.clientHeight;
+// function handleScroll() {
+//   const scrollHeight = document.body.scrollHeight;
+//   const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+//   const clientHeight = document.documentElement.clientHeight;
 
-  // 滾了多少(離到底還有多少)
-  const distance = scrollHeight - scrollTop - clientHeight;
+//   // 滾了多少(離到底還有多少)
+//   const distance = scrollHeight - scrollTop - clientHeight;
 
-  console.log(distance)
+//   console.log(distance)
 
-  if (distance <= 100) {
-    if (!loading.value) {
-      console.log('家載略');
-      query.page += 1;
-      props.getData(query);
-    }
-  }
-}
+//   if (distance <= 100) {
+//     if (!loading.value) {
+//       console.log('家載略');
+//       query.page += 1;
+//       props.getData(query);
+//     }
+//   }
+// }
 
 function orderScroll() {
   const { scrollHeight, clientHeight, scrollTop } = scrollListRef.value;
@@ -45,11 +46,11 @@ function orderScroll() {
   // 滾了多少(離到底還有多少)
   const distance = scrollHeight - scrollTop - clientHeight;
 
-  console.log(distance)
+  // console.log(distance)
 
   if (distance <= 100) {
     if (!loading.value) {
-      console.log('家載略');
+      // console.log('家載略');
       query.page += 1;
       props.getData(query);
     }
