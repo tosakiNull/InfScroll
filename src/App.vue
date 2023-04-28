@@ -25,6 +25,7 @@ async function getData(query = defQuery) {
   if (res) {
     repoList = repoList.concat(res.data.items);
     total.value = res.data.total_count;
+    // console.log('data get!')
   }
 
   loading.value = false;
@@ -46,9 +47,9 @@ onMounted(async () => {
     <div class="main-view">
       <ListView
         :data="repoList"
-        :getData="getData"
         :loading="loading"
         :defQuery="defQuery"
+        @update-data="getData"
       />
     </div>
   </main>
@@ -79,6 +80,6 @@ main {
 .main-view {
   padding: 1rem;
   padding-top: 6rem;
-  height: 90vh;
+  height: 85vh;
 }
 </style>
