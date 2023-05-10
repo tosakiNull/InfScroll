@@ -139,6 +139,7 @@ const showList = computed(() => {
   overflow-x: hidden;
 }
 .list-view-main {
+  height: 100%;
   position: relative;
 }
 .msg {
